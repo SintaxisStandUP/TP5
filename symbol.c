@@ -1,8 +1,20 @@
 #include <stdio.h>
 #include "scanner.h"
 #include "parser.h"
-#include "semantic.h"
-enum {REG_OPERACION, REG_EXPRESION};
+#include "symbol.h"
 
-char vector[200];
+int buscar(char *id){
+	while (i<iProx){
+		if (id==diccionario[i])
+			encontrado=1;
+		i++;
+	}	
+	return encontrado; //si devuelve 1 se encontro el id, si devuelve 0 no
+}
+
+void agregar (char *id){
+	diccionario[iProx]=id;
+	iProx++;
+}
+
 

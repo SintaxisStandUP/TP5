@@ -25,7 +25,7 @@
 estructura : PROG VAR definicion COD sentencias FIN {if (yynerrs || yylexerrs) YYABORT; else YYACCEPT;}
 
 definicion : definicion DEF variables
-		|DEF variables
+		|DEF variables 
 		| error  '.';
 
 variables : ID '.' {printf ("definir %s \n", yyval);}
