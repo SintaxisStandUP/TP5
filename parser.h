@@ -71,7 +71,7 @@ extern YYSTYPE yylval;
 
 int yyparse (void);
 /* "%code provides" blocks.  */
-#line 8 "parser.y" /* yacc.c:1909  */
+#line 9 "parser.y" /* yacc.c:1909  */
 
 	void yyerror(const char *s);
 	int yylexerrs;

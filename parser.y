@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "scanner.h"
 #include "semantic.h"
+#include <string.h>
 char* linea;
 }
 

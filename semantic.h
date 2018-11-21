@@ -2,7 +2,7 @@
 
 void inicio();
 void declarar (char *id);
-void operacion(char *idEntrada1,int operando, char *idEntrada2);
+
 void inversion(char  *idEntrada1);
 void asignar(char*a, char*b);
 void leer(char*a);

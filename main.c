@@ -13,8 +13,6 @@
 #include "scanner.h"
 #include "parser.h"
 #include "semantic.h"
-//extern int yylexerrs;
-//extern int yynerrs;
 
 int main (){
 
