@@ -1,12 +1,12 @@
 //semantic.h
 
 void inicio();
-char* sumar(char*, char*);
-char* restar(char*, char*);
-char* multiplicar(char*, char*);
-char* dividir(char*, char*);
-char* asignar(char*, char*);
-void leer(char*);
-void escribir(char*);
+char* sumar(char* a,int algo, char*b);
+char* restar(char*a, char*b);
+char* multiplicar(char*a, char*b);
+char* dividir(char*a, char*b);
+char* asignar(char*a, char*b);
+void leer(char*a);
+void escribir(char*b);
 void fin();
 

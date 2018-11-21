@@ -1,6 +1,7 @@
 %code top{
 #include <stdio.h>
 #include "scanner.h"
+#include "semantic.h"
 }
 
 %code provides{
@@ -23,11 +24,6 @@
 %%
 estructura : PROG VAR definicion COD sentencias FIN {if (yynerrs || yylexerrs) YYABORT; else YYACCEPT;}
 
-//definicion : DEF variables {printf ("definir ");}
-
-//variables : ID '.' definicion {printf (" %s \n", yyval);}
-//		  | ID '.' {printf ("%s \n", yyval);}
-
 definicion : definicion DEF variables
 		|DEF variables
 		| error  '.';
@@ -46,16 +42,15 @@ listaIdentificadores : listaIdentificadores ',' ID | ID | error  '.';
 listaExpresiones : listaExpresiones ',' expresion | expresion | error  '.';
 
 
-expresion: expresion '+' expresion {printf ("suma \n");}
+expresion: 	expresion '+' expresion {sumar($1,'+',$3);}
 		|expresion '-' expresion{printf ("resta \n");} 
-		|expresion '*' '-' expresion %prec NEG{printf("inversion\n");printf("multiplicacion\n");}
 		|expresion '*' expresion {printf("multiplicacion\n");}
-		|expresion '/' '-' expresion %prec NEG{printf("inversion\n");printf("division\n");}
 		|expresion '/' expresion {printf("division\n");}
 		|ID 
 		|CTE 
 		|'(' expresion ')' {printf ("parentesis \n");}
-		| '-' expresion %prec NEG;
+		| '-' expresion %prec NEG{printf ("inversion \n");}
+		;
 
 
 %%

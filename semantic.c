@@ -1,16 +1,23 @@
 #include <stdio.h>
+#include <string.h>
 #include "scanner.h"
 #include "parser.h"
 #include "semantic.h"
+int variableEstatica=0;
 void inicio(){
       printf("Load rtlib, \n");
 }
+char* proxTemp(){
+	variableEstatica++;
+	
+	
+}
  
-char* sumar(char *idEntrada1, char *idEntrada2){
+char* sumar(char *idEntrada1,int algo, char *idEntrada2){
       char *idSalida;
-      idSalida = proxTemp();
+     // idSalida = proxTemp();
       printf("ADD %s,%s,%s\n", idEntrada1, idEntrada2, idSalida);
-      return idSalida;
+      return "hola";
 }
  
 char* restar(char *idEntrada1, char *idEntrada2){
