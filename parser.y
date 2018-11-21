@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "scanner.h"
 #include "semantic.h"
+char* linea;
 }
 
 %code provides{
@@ -22,34 +23,34 @@
 %define parse.error verbose
 
 %%
-estructura : PROG VAR definicion COD sentencias FIN {if (yynerrs || yylexerrs) YYABORT; else YYACCEPT;}
+estructura : PROG {inicio();} VAR definicion COD sentencias FIN {if (yynerrs || yylexerrs) YYABORT; else YYACCEPT;}
 
 definicion : definicion DEF variables
-		|DEF variables 
+		|DEF variables
 		| error  '.';
 
-variables : ID '.' {printf ("definir %s \n", yyval);}
+variables : ID '.' {declarar(yyval);}
 		
 sentencias : sentencias sentencia | sentencia;
 
 sentencia: lectura | escritura | asignacion | error '.';
 
-lectura : LEER '(' listaIdentificadores ')' '.' {printf ("leer \n");};
+lectura : LEER '(' listaIdentificadores ')' '.'
 escritura : ESC '(' listaExpresiones ')' '.' {printf ("escribir \n");};
 asignacion : ID ASIG expresion '.' {printf ("asignacion \n");};
 
-listaIdentificadores : listaIdentificadores ',' ID | ID | error  '.';
+listaIdentificadores : listaIdentificadores ',' ID {leer($3);}| ID{leer(yyval);} | error  '.';
 listaExpresiones : listaExpresiones ',' expresion | expresion | error  '.';
 
 
-expresion: 	expresion '+' expresion {sumar($1,'+',$3);}
-		|expresion '-' expresion{printf ("resta \n");} 
-		|expresion '*' expresion {printf("multiplicacion\n");}
-		|expresion '/' expresion {printf("division\n");}
+expresion: 	expresion '+' expresion {operacion($1,'+',$3);}
+		|expresion '-' expresion{operacion($1,'-',$3);} 
+		|expresion '*' expresion {operacion($1,'*',$3);}
+		|expresion '/' expresion {operacion($1,'/',$3);}
 		|ID 
 		|CTE 
 		|'(' expresion ')' {printf ("parentesis \n");}
-		| '-' expresion %prec NEG{printf ("inversion \n");}
+		| '-' expresion %prec NEG{operacion($2,0,"");}//el 0 es por la inversion
 		;
 
 
