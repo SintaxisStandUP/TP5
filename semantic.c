@@ -5,7 +5,6 @@
 #include "semantic.h"
 #include "symbol.h"
 int nroDeTemporal=1;
-void operacion(char *idEntrada1,int operando, char *idEntrada2);
 void inicio(){
       printf("Load rtlib, \n");
 }
@@ -18,7 +17,6 @@ void operacion(char *idEntrada1,int operando, char *idEntrada2){
 	switch(operando){
 		case 0:
 			printf("INV %s,%s,%s\n", idEntrada1, idEntrada2, idSalida);
-			char*idEntrada2 = idSalida;//esto no se porque primero anda y dsepues rompe
 			break;
 
 		case '+':
@@ -37,6 +35,8 @@ void operacion(char *idEntrada1,int operando, char *idEntrada2){
 		default:
 			printf("no salio capo\n");
 	}
+		free(idEntrada1);
+		idEntrada1 = strdup(idSalida);
 //	return idSalida;
 }
 /*
@@ -61,7 +61,7 @@ void declarar (char *id){
 
  
 void asignar(char *idEntrada, char *idSalida){
-      printf("Store %s, %s \n", idEntrada, idSalida);
+      printf("Store %s, %s \n", idSalida, idEntrada);
 }
  
 void leer(char *id){

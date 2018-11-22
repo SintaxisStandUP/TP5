@@ -1281,7 +1281,7 @@ yyreduce:
 
   case 16:
 #line 41 "parser.y" /* yacc.c:1646  */
-    {printf ("asignacion \n");}
+    {asignar((yyvsp[-3]),(yyvsp[-1]));}
 #line 1286 "parser.c" /* yacc.c:1646  */
     break;
 
@@ -1329,7 +1329,7 @@ yyreduce:
 
   case 30:
 #line 54 "parser.y" /* yacc.c:1646  */
-    {operacion((yyvsp[0]),0,"");}
+    {operacion((yyvsp[0]),0,"");(yyval)=(yyvsp[0]);}
 #line 1334 "parser.c" /* yacc.c:1646  */
     break;
 

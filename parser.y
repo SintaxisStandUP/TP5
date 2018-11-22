@@ -36,9 +36,9 @@ sentencias : sentencias sentencia | sentencia;
 
 sentencia: lectura | escritura | asignacion | error '.';
 
-lectura : LEER '(' listaIdentificadores ')' '.'
+lectura : LEER '(' listaIdentificadores ')' '.';
 escritura : ESC '(' listaExpresiones ')' '.' {printf ("escribir \n");};
-asignacion : ID ASIG expresion '.' {printf ("asignacion \n");};
+asignacion : ID ASIG expresion '.' {asignar($1,$3);};
 
 listaIdentificadores : listaIdentificadores ',' ID {leer($3);}| ID{leer(yyval);} | error  '.';
 listaExpresiones : listaExpresiones ',' expresion | expresion | error  '.';
@@ -51,7 +51,7 @@ expresion: 	expresion '+' expresion {operacion($1,'+',$3);}
 		|ID 
 		|CTE 
 		|'(' expresion ')' {printf ("parentesis \n");}
-		| '-' expresion %prec NEG{operacion($2,0,"");}//el 0 es por la inversion
+		| '-' expresion %prec NEG{operacion($2,0,"");$$=$2;}//el 0 es por la inversion
 		;
 
 
