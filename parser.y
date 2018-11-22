@@ -10,6 +10,7 @@ char* linea;
 	void yyerror(const char *s);
 	int yylexerrs;
 	int yynerrs;
+	int yySEM;
 }
 
 %defines "parser.h"
@@ -24,7 +25,7 @@ char* linea;
 %define parse.error verbose
 
 %%
-estructura : PROG {inicio();} VAR definicion COD sentencias FIN {if (yynerrs || yylexerrs) YYABORT; else YYACCEPT;}
+estructura : PROG {inicio();} VAR definicion COD sentencias FIN {fin();if (yynerrs || yylexerrs) YYABORT; else YYACCEPT;}
 
 definicion : definicion DEF variables
 		|DEF variables
@@ -37,11 +38,11 @@ sentencias : sentencias sentencia | sentencia;
 sentencia: lectura | escritura | asignacion | error '.';
 
 lectura : LEER '(' listaIdentificadores ')' '.';
-escritura : ESC '(' listaExpresiones ')' '.' {printf ("escribir \n");};
+escritura : ESC '(' listaExpresiones ')' '.';
 asignacion : ID ASIG expresion '.' {asignar($1,$3);};
 
 listaIdentificadores : listaIdentificadores ',' ID {leer($3);}| ID{leer(yyval);} | error  '.';
-listaExpresiones : listaExpresiones ',' expresion | expresion | error  '.';
+listaExpresiones : listaExpresiones ',' expresion {escribir($3);}| expresion{escribir(yyval);} | error  '.';
 
 
 expresion: 	expresion '+' expresion {operacion($1,'+',$3);}
@@ -50,7 +51,7 @@ expresion: 	expresion '+' expresion {operacion($1,'+',$3);}
 		|expresion '/' expresion {operacion($1,'/',$3);}
 		|ID 
 		|CTE 
-		|'(' expresion ')' {printf ("parentesis \n");}
+		|'(' expresion ')' {$$=$2;}
 		| '-' expresion %prec NEG{operacion($2,0,"");$$=$2;}//el 0 es por la inversion
 		;
 

@@ -14,7 +14,7 @@ int buscar(char *id){
 			return 1;
 		i++;
 	}	
-	return 0; //si devuelve 1 se encontro el id, si devuelve 0 no
+	return 0; //si devuelve 1 el id esta en el diccionario, sino devuelve 0
 }
 
 void agregar (char *id){

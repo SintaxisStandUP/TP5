@@ -1,8 +1,9 @@
 //semantic.h
-
+char bufferEr[100];
 void inicio();
 void declarar (char *id);
 void operacion(char *idEntrada1,int operando, char *idEntrada2);
+void declararError(char* id1, char* id2);
 
 void asignar(char*a, char*b);
 void leer(char*a);
@@ -11,11 +12,3 @@ void fin();
 
 
 
-
-
-
-char* sumar(char* a,int algo, char*b);
-char* restar(char*a, char*b);
-char* multiplicar(char*a, char*b);
-char* dividir(char*a, char*b);
-void inversion(char  *idEntrada1);

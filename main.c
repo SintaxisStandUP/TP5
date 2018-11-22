@@ -28,7 +28,7 @@ int main (){
 		puts("Memoria insuficiente"); f=2; break;
 	}
 	
-	printf ("Errores lexicos: %d - Errores sintacticos: %d - Errores semanticos: \n", yylexerrs, yynerrs);
+	printf ("Errores lexicos: %d - Errores sintacticos: %d - Errores semanticos: %d\n", yylexerrs, yynerrs,yySEM);
 	return f;
 }
 
